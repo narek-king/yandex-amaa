@@ -10,7 +10,9 @@
 
 </head>
 <body>
-
+<script>
+    var host = '<?php echo env('APP_HOST'); ?>';
+</script>
 <div class="container">
     <div class="row justify-content-md-center">
         <div class="col col-lg-12">

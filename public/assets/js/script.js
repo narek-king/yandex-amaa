@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    var host = 'http://localhost:8000/';
     var $table = $('#table'),
         $button = $('#button'),
         $create = $('#create'),
