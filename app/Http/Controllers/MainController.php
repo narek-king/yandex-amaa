@@ -25,8 +25,8 @@ class MainController extends Controller
             'index',
             'yandexLogin',
             'yandexCallback',
-            'yandexRefreshToken'
-
+            'yandexRefreshToken',
+            'test'
         ]]);
 
         $this->base_url = env('OURL');
@@ -39,6 +39,11 @@ class MainController extends Controller
     public function index($world){
 
 //        return view('home', ['world' => $world]);
+    }
+
+    public function test(){
+        if (env('APP_ENV') !== 'local')
+           return redirect(url());
     }
 
     public function yandexLogin(){
@@ -95,7 +100,7 @@ class MainController extends Controller
         if ($request->input('domain') != null)
             $domain = $request->input('domain');
 
-        $login = $this->normalize($this->wordParser($this->brake_word($name)));
+        $login = $this->normalize($this->brake_word($this->wordParser($name)));
         return response()->json(['name'=>$name,
                                 'login'=>$login,
                                 'password'=>$this->passwordMaker(),
@@ -143,13 +148,25 @@ class MainController extends Controller
     }
 
     function brake_word($string){
-        $words = explode(" ", $string);
-        if (isset($words[1])){
+        $words = explode(".", $string);
+        $newWord = [];
+        if ($this->isSurname($words[0])){
             $newWord[0]= $words[1];
             $newWord[1]= ".";
             $newWord[2]= $words[0];
-            return implode($newWord);}
-        else return "Undefined";
+        }
+        else {
+            $newWord[0]= $words[0];
+            $newWord[1]= ".";
+            $newWord[2]= $words[1];
+        }
+        return implode($newWord);
+    }
+
+    function isSurname($string){
+        if (substr($string, strlen($string)-3, 3) === 'yan')
+            return true;
+        return false;
     }
 
 
