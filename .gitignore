@@ -3,3 +3,8 @@
 Homestead.json
 Homestead.yaml
 .env
+.htaccess
+auto-update.bash
+error_log
+index.php
+public/error_log
