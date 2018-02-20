@@ -19,6 +19,7 @@ $router->get('/', function () use ($router) {
 $router->get('cont/{world}', 'MainController@index');
 $router->get('login/', 'MainController@yandexLogin');
 $router->get('callback', 'MainController@yandexCallback');
+$router->get('test', 'MainController@test');
 $router->post('refresh', 'MainController@yandexRefreshToken');
 $router->post('prepare', 'MainController@prepareEmail');
 $router->post('account', 'MainController@createAccount');
